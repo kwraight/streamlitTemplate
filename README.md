@@ -22,6 +22,22 @@ example page:  *page_A_top*
 
 ## Docker
 
-build image:
+Either of two files can be used to build basic templates (structural files):
 
-> docker build . -f dockerFiles/Dockerfile -t templateApp
+build *usual* image:
+
+> docker build . -f dockerFiles/Dockerfile -t template-app
+
+build *Cern usable* image (for use with openShift):
+
+> docker build . -f dockerFiles/DockerfileCern -t template-app
+
+An additional file is supplied to make use of additional content. The procedure is as follows:
+
+1. make a ''pages'' sub-directory
+
+2. add files to directory (use prefix: ''page_'')
+
+3. run docker build (from ''pages'' parent directory)
+
+> docker build . -f DockerfileUpdate -t new-app
