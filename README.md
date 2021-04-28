@@ -17,3 +17,11 @@
 ## Content pages
 in *pages* directory
 example page:  *page_A_top*
+
+---
+
+## Docker
+
+build image:
+
+> docker build . -f dockerFiles/Dockerfile -t templateApp
