@@ -1,0 +1,6 @@
+st_annotated_text==1.0.1
+plotly==4.14.3
+numpy==1.20.1
+streamlit==0.80.0
+altair==4.1.0
+pandas==1.0.5
