@@ -32,7 +32,7 @@ build *Cern usable* image (for use with openShift):
 
 > docker build . -f dockerFiles/DockerfileCern -t template-app
 
-An additional file is supplied to make use of additional content (based on *usual* template image). 
+An additional file is supplied to make use of additional content (based on *usual* template image).
 The procedure is as follows:
 
 1. make a ''pages'' sub-directory
@@ -42,3 +42,5 @@ The procedure is as follows:
 3. build *new* image (from ''pages'' parent directory)
 
 > docker build . -f DockerfileUpdate -t new-app
+
+**NB** no volume sharing included at the moment
