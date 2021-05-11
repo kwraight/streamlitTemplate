@@ -106,6 +106,19 @@ def SelectBox(myDict, myKey, opts, txt, lamKey=None):
         except ValueError:
             myDict[myKey]=st.selectbox(txt, opts, format_func=lambda x: x[lamKey] )
 
+def SelectBoxDf(myDict, myKey, df, txt, colName):
+    if colName not in list(df.columns):
+        st.write("No",colName,"found in dataframe")
+        st.stop()
+    opts=list(df[colName].unique())
+    try:
+        val=st.selectbox(txt, opts, index=opts.index(myDict[myKey]) )
+    except KeyError:
+        val=st.selectbox(txt, opts )
+    except ValueError:
+        val=st.selectbox(txt, opts )
+    myDict[myKey]=df.query(colName+'=="'+val+'"')
+
 def MultiSelect(myDict, myKey, opts, txt):
     if len(opts)<1:
         st.write("No options found for "+myKey)
