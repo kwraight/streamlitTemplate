@@ -20,7 +20,30 @@ example page:  *page_A_top*
 
 ---
 
-## Docker
+## Adding content
+
+An additional file is supplied to make use of additional content (based on *usual* template image).
+The procedure is as follows:
+
+1. make a ''pages'' sub-directory
+
+2. add files to directory (use prefix: ''page_'')
+  * add letter suffix to order pages: e.g. ''page_A_first.py'' file --> ''first'' page of webApp
+
+---
+
+## Running locally
+
+Run webApp locally:
+
+* run streamlit:
+> streamlit run mainApp.py
+
+* open browser at ''localhost:8501''
+
+---
+
+## Running via docker
 
 Either of two files can be used to build basic templates (structural files):
 
@@ -35,21 +58,16 @@ build *Cern usable* image (for use with openShift):
 An additional file is supplied to make use of additional content (based on *usual* template image).
 The procedure is as follows:
 
-1. make a ''pages'' sub-directory
-
-2. add files to directory (use prefix: ''page_'')
-  * add letter suffix to order pages: e.g. ''page_A_first.py'' file --> ''first'' page of webApp
-
-3. build *new* image (from ''pages'' parent directory)
+* build *new* image (from ''pages'' parent directory)
 
 > docker build . -f dockerFiles/Dockerfile -t new-app
 
 The build will copy files in the pages directory into the image and use these as content of the webApp.
 
-4. run container from image:
+* run container from image:
 
 > docker run -p 8501:8501 new-app
 
-5. open browser at ''localhost:8501''
+* open browser at ''localhost:8501''
 
 **NB** no volume sharing included at the moment
