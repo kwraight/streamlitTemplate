@@ -38,9 +38,18 @@ The procedure is as follows:
 1. make a ''pages'' sub-directory
 
 2. add files to directory (use prefix: ''page_'')
+  * add letter suffix to order pages: e.g. ''page_A_first.py'' file --> ''first'' page of webApp
 
 3. build *new* image (from ''pages'' parent directory)
 
-> docker build . -f DockerfileUpdate -t new-app
+> docker build . -f dockerFiles/Dockerfile -t new-app
+
+The build will copy files in the pages directory into the image and use these as content of the webApp.
+
+4. run container from image:
+
+> docker run -p 8501:8501 new-app
+
+5. open browser at ''localhost:8501''
 
 **NB** no volume sharing included at the moment
