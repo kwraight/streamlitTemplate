@@ -43,7 +43,7 @@ Run webApp locally:
 
 ---
 
-## Running via docker
+## Running via Docker
 
 Either of two files can be used to build basic templates (structural files):
 
