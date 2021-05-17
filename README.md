@@ -1,8 +1,10 @@
 # streamlitTemplate
  template app for streamlit platform
 
-**running**
-> streamlit run mainApp.py
+ **Basic Idea:**
+ * template for [streamlit](https://streamlit.io) webApps
+
+ Check requirements file for necessary libraries
 
 ---
 
