@@ -38,6 +38,9 @@ The procedure is as follows:
 
 Run webApp locally:
 
+* get required libraries:
+> python3 -m pip install -r requirements
+
 * run streamlit:
 > streamlit run mainApp.py
 
@@ -51,11 +54,11 @@ Either of two files can be used to build basic templates (structural files):
 
 build *usual* image:
 
-> docker build . -f dockerFiles/Dockerfile -t template-app
+> docker build . -f dockerFiles/Dockerfile -t new-app
 
 build *Cern usable* image (for use with openShift):
 
-> docker build . -f dockerFiles/DockerfileCern -t template-app
+> docker build . -f dockerFiles/DockerfileCern -t new-app
 
 An additional file is supplied to make use of additional content (based on *usual* template image).
 The procedure is as follows:
@@ -76,6 +79,7 @@ The build will copy files in the pages directory into the image and use these as
 
 ## Running with mounted volume
 
-This allows changes to files in mounted directory to be propagated to container immediately (*i.e.* without rebuilding) - useful for development! **NB** this will overwrite any files in linked directory:
+This allows changes to files in mounted directory to be propagated to container immediately (*i.e.* without rebuilding) - useful for development!
+**NB** this will overwrite any files in linked directory:
 
 > docker run -p 8501:8501 -v $(pwd)/pages:code/pages new-app
