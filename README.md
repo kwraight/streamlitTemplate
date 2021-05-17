@@ -70,4 +70,10 @@ The build will copy files in the pages directory into the image and use these as
 
 * open browser at ''localhost:8501''
 
-**NB** no volume sharing included at the moment
+---
+
+## Running with mounted volume
+
+This allows changes to files in mounted directory to be propagated to container immediately (*i.e.* without rebuilding) - useful for development! **NB** this will overwrite any files in linked directory:
+
+> docker run -p 8501:8501 -v $(pwd)/pages:code/pages new-app
