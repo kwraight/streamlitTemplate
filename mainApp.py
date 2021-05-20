@@ -12,7 +12,7 @@ import page_debug
 # get pages from pages directory
 import importlib
 pagesDir=cwd+"/pages"
-pageFiles= [f for f in os.listdir(pagesDir) if os.path.isfile(os.path.join(pagesDir, f)) and "page_" in f]
+pageFiles= [f for f in os.listdir(pagesDir) if os.path.isfile(os.path.join(pagesDir, f)) and "page_" in f and not f.endswith("~")]
 pageFiles=sorted(pageFiles)
 sys.path.insert(1, pagesDir)
 modules= [importlib.import_module(p[:-3]) for p in pageFiles]
