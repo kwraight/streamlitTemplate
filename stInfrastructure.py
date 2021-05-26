@@ -5,6 +5,7 @@ from streamlit.hashing import _CodeHasher
 from streamlit.server.server import Server
 ###
 import base64
+import pandas as pd
 
 ################
 ### Useful functions
@@ -32,6 +33,17 @@ def DisplayWithOption(df):
     st.dataframe(df)
     if st.button("download table"):
         st.markdown(get_table_download_link(df), unsafe_allow_html=True)
+
+
+def ColourCells(s, df, colName, flip=False):
+    thisRow = pd.Series(data=False, index=s.index)
+    # vailable colours: 9*x=5
+    colours=['red','blue','green','orange','purple''yellow','pink','lightblue','lightgreen']*5
+    names=list(df[colName].unique())
+    if flip:
+        return ['background-color: %s ; color: %s'% ('white',colours[names.index(s[colName])])]*len(df.columns)
+    else:
+        return ['background-color: %s ; color: %s'% (colours[names.index(s[colName])],'black')]*len(df.columns)
 
 ###
 ### Info.
@@ -119,7 +131,7 @@ def SelectBoxDf(myDict, myKey, df, txt, colName):
     except ValueError:
         val=st.selectbox(txt, opts )
     myDict[myKey]=df.query(colName+'=="'+val+'"')
-    
+
 def MultiSelect(myDict, myKey, opts, txt):
     if len(opts)<1:
         st.write("No options found for "+myKey)
