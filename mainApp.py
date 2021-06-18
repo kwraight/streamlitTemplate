@@ -59,6 +59,13 @@ def main():
         state.debug=True
     else: state.debug=False
 
+    ### small print
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("*small print*:")
+    st.sidebar.markdown("[git repository](https://github.com/kwraight/streamlitTemplate)")
+
+    st.sidebar.markdown("streamlitTemplate: "+infra.Version())
+
     ### display  selected page using state variable
     pages[page](state)
 
