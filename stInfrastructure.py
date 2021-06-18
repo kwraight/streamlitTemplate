@@ -102,21 +102,27 @@ def SelectBox(myDict, myKey, opts, txt, lamKey=None):
     if len(opts)<1:
         st.write("No options found for "+myKey)
         st.stop()
+    sortedOpts=opts
+    if type(opts[0])!=type({}) and type(opts[0])!=type([]):
+        sortedOpts=sorted(opts)
+
     if lamKey==None:
         try:
-            myDict[myKey]=st.selectbox(txt, opts, index=opts.index(myDict[myKey]) )
+            myDict[myKey]=st.selectbox(txt, sortedOpts, index=sortedOpts.index(myDict[myKey]) )
         except KeyError:
-            myDict[myKey]=st.selectbox(txt, opts )
+            myDict[myKey]=st.selectbox(txt, sortedOpts )
         except ValueError:
-            myDict[myKey]=st.selectbox(txt, opts )
+            myDict[myKey]=st.selectbox(txt, sortedOpts )
     else:
         #st.write("for",lamKey,"and",myDict[myKey],":",opts.index(myDict[myKey]))
+        if type(opts[0])==type({}):
+            sortedOpts=sorted(opts, key=lambda k: k[lamKey])
         try:
-            myDict[myKey]=st.selectbox(txt, opts, format_func=lambda x: x[lamKey], index=opts.index(myDict[myKey]) )
+            myDict[myKey]=st.selectbox(txt, sortedOpts, format_func=lambda x: x[lamKey], index=sortedOpts.index(myDict[myKey]) )
         except KeyError:
-            myDict[myKey]=st.selectbox(txt, opts, format_func=lambda x: x[lamKey] )
+            myDict[myKey]=st.selectbox(txt, sortedOpts, format_func=lambda x: x[lamKey] )
         except ValueError:
-            myDict[myKey]=st.selectbox(txt, opts, format_func=lambda x: x[lamKey] )
+            myDict[myKey]=st.selectbox(txt, sortedOpts, format_func=lambda x: x[lamKey] )
 
 ### pandas dataframe variation
 def SelectBoxDf(myDict, myKey, df, txt, colName):
@@ -124,37 +130,44 @@ def SelectBoxDf(myDict, myKey, df, txt, colName):
         st.write("No",colName,"found in dataframe")
         st.stop()
     opts=list(df[colName].unique())
+    sortedOpts=sorted(opts)
     try:
-        val=st.selectbox(txt, opts, index=opts.index(myDict[myKey]) )
+        val=st.selectbox(txt, sortedOpts, index=sortedOpts.index(myDict[myKey]) )
     except KeyError:
-        val=st.selectbox(txt, opts )
+        val=st.selectbox(txt, sortedOpts )
     except ValueError:
-        val=st.selectbox(txt, opts )
+        val=st.selectbox(txt, sortedOpts )
     myDict[myKey]=df.query(colName+'=="'+val+'"')
 
 def MultiSelect(myDict, myKey, opts, txt):
     if len(opts)<1:
         st.write("No options found for "+myKey)
         st.stop()
+    sortedOpts=opts
+    if type(opts[0])!=type({}) and type(opts[0])!=type([]):
+        sortedOpts=sorted(opts)
     try:
-        myDict[myKey]=st.multiselect(txt, opts, default=myDict[myKey] )
+        myDict[myKey]=st.multiselect(txt, sortedOpts, default=myDict[myKey] )
     except KeyError:
-        myDict[myKey]=st.multiselect(txt, opts )
+        myDict[myKey]=st.multiselect(txt, sortedOpts )
     except ValueError:
-        myDict[myKey]=st.multiselect(txt, opts )
+        myDict[myKey]=st.multiselect(txt, sortedOpts )
     except st.StreamlitAPIException:
-        myDict[myKey]=st.multiselect(txt, opts )
+        myDict[myKey]=st.multiselect(txt, sortedOpts )
 
 def Radio(myDict, myKey, opts, txt):
     if len(opts)<1:
         st.write("No options found for "+myKey)
         st.stop()
+    sortedOpts=opts
+    if type(opts[0])!=type({}) and type(opts[0])!=type([]):
+        sortedOpts=sorted(opts)
     try:
-        myDict[myKey]=st.radio(txt, opts, index=opts.index(myDict[myKey]))
+        myDict[myKey]=st.radio(txt, sortedOpts, index=sortedOpts.index(myDict[myKey]))
     except KeyError:
-        myDict[myKey]=st.radio(txt, opts)
+        myDict[myKey]=st.radio(txt, sortedOpts)
     except ValueError:
-        myDict[myKey]=st.radio(txt, opts)
+        myDict[myKey]=st.radio(txt, sortedOpts)
 
 def Slider(myDict, myKey, myMin, myMax, txt):
     try:
