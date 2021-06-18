@@ -76,6 +76,9 @@ def ComponentInfo(user,comp):
 ### Widgets
 ###
 
+def Version():
+    return ("18-06-21")
+
 def ToggleButton(myDict, myKey, txt):
     try:
         myDict[myKey] = st.checkbox(txt, value=myDict[myKey])
