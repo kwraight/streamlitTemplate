@@ -4,37 +4,39 @@ from urllib import request
 import json
 from annotated_text import annotated_text, annotation
 ###
+import os
+import sys
+cwd = os.getcwd()
+sys.path.insert(1, cwd+"/core")
 import stInfrastructure as infra
 
 #####################
 ### Check state page
 #####################
-def display_state_values(state):
+def display_state_values():
 
     st.write("## All data")
-    st.write("Debug setting:", state.debug)
+    st.write("Debug setting:", st.session_state.debug)
     st.write("---")
 
     # debug check
-    if state.debug:
+    if st.session_state.debug:
         st.write("### Debug is on")
 
     # check page info. defined
-    if "broom" in [i for i in state.__dict__.keys() if i[:1] != '_']:
-        if state.debug: st.write("state.broom defined")
+    if "Broom" in [i for i in st.session_state.keys()]:
+        if st.session_state.debug: st.write("st.session_state.Broom defined")
     else:
-        state.broom={}
+        st.session_state.Broom={}
 
-    # st.write(dir(state))
-    myatts=[x for x in dir(state) if "__" not in x]
-    st.write(myatts)
-    for ma in myatts:
-        #if ma=="broom": continue
-        st.write(f"**{ma}** information")
-        infra.ToggleButton(state.broom,'show_'+ma,f"Show *{ma}* information")
-        if state.broom['show_'+ma]:
-            st.write(state.__getattribute__(ma))
-
+    myKeys=[x for x in st.session_state.keys()]
+    st.write(myKeys)
+    for mk in myKeys:
+        if mk=="debug": continue
+        st.write(f"**{mk}** information")
+        infra.ToggleButton(st.session_state.Broom,'show_'+mk,f"Show *{mk}* information")
+        if st.session_state.Broom['show_'+mk]:
+            st.write(st.session_state[mk])
 
 
 ### get API response from endpoint
@@ -44,9 +46,9 @@ def GetResponse(endStr):
     return api_response
 
 
-def EasterEgg(state):
+def EasterEgg():
     ### wee bit of fun
-    if state.debug:
+    if st.session_state.debug:
         st.write(":egg: Easter Egg")
         if st.button("Get a quote"):
             quote=GetResponse("https://favqs.com/api/qotd")
@@ -58,22 +60,21 @@ def EasterEgg(state):
                 )
 
 
-def main_part(state):
+def main():
     st.title(":wrench: Broom cupboard")
     st.write("---")
     st.write("## Bits and bobs for maintainance")
     st.write("---")
 
-    display_state_values(state)
+    display_state_values()
 
     st.write("## :exclamation: Clear all state settings")
     if st.button("Clear state"):
-        for ma in [x for x in dir(state) if "__" not in x]:
-            if ma=="debug": continue
+        for mk in [x for x in st.session_state.keys()]:
+            if mk=="debug": continue
             try:
-                state.__delattr__(ma)
+                state.__delattr__(mk)
             except AttributeError:
                 pass
 
-
-    EasterEgg(state)
+    EasterEgg()
