@@ -12,13 +12,13 @@
 
 *mainApp*: main file to run
 
+## Content pages
+in *pages* directory
+example page:  *page0*
+
 *page_debug*: in-app debugging information
 
 *stInfrastructure*: useful wrappers for streamlit functions
-
-## Content pages
-in *pages* directory
-example page:  *page_A_top*
 
 ---
 
