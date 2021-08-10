@@ -10,6 +10,7 @@ RUN pip3 install -r requirements.txt
 
 # copying everything over
 COPY *.py ./code/
+COPY core/*.py ./code/core/
 COPY pages/*.py ./code/pages/
 
 WORKDIR code
