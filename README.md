@@ -12,9 +12,10 @@
 
 *mainApp*: main file to run
 
-## Content pages
+## Content pages:
 in *pages* directory
-example page:  *page0*
+
+*page0*: example page
 
 *page_debug*: in-app debugging information
 
