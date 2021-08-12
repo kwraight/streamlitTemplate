@@ -31,7 +31,6 @@ in *userPages* directory
 
 *page0*: example page
 
-
 ---
 
 ## Adding content
