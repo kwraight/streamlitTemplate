@@ -82,4 +82,4 @@ The build will copy files in the _userPages_ directory into the image and use th
 This allows changes to files in mounted directory to be propagated to container immediately (*i.e.* without docker rebuilds) - useful for development!
 **NB** this will overwrite any files in linked directory:
 
-> docker run -p 8501:8501 -v $(pwd)/userPages:code/userPages new-app
+> docker run -p 8501:8501 -v $(pwd)/userPages:/code/userPages new-app
