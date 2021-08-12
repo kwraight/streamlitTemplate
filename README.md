@@ -12,26 +12,37 @@
 
 *mainApp*: main file to run
 
-## Content pages:
-in *pages* directory
+## Core code
+in *core* directory
+
+*app*: app class and basic structure
+
+*page*: page class and basic structure
+
+*stInfrastructure*: useful wrappers for streamlit functions
+
+## Core pages:
+in *userPages* directory
+
+*pageX*: Debug page _a.k.a._ "Broom Cupboard"
+
+## User content pages:
+in *userPages* directory
 
 *page0*: example page
 
-*page_debug*: in-app debugging information
-
-*stInfrastructure*: useful wrappers for streamlit functions
 
 ---
 
 ## Adding content
 
-An additional file is supplied to make use of additional content (based on *usual* template image).
+See example page for template structure.
 The procedure is as follows:
 
-1. make a ''pages'' sub-directory
+1. make a ''userPages'' sub-directory
 
 2. add files to directory (use prefix: ''page_'')
-  * add letter suffix to order pages: e.g. ''page_A_first.py'' file --> ''first'' page of webApp
+  * add number suffix to order pages: e.g. _page1.py_ name will be first in sidebar selection.
 
 ---
 
@@ -53,24 +64,13 @@ Run webApp locally:
 
 Either of two files can be used to build basic templates (structural files):
 
-build *usual* image:
+build image:
 
 > docker build . -f dockerFiles/Dockerfile -t new-app
 
-build *Cern usable* image (for use with openShift):
+The build will copy files in the _userPages_ directory into the image and use these as content for the webApp.
 
-> docker build . -f dockerFiles/DockerfileCern -t new-app
-
-An additional file is supplied to make use of additional content (based on *usual* template image).
-The procedure is as follows:
-
-* build *new* image (from ''pages'' parent directory)
-
-> docker build . -f dockerFiles/Dockerfile -t new-app
-
-The build will copy files in the pages directory into the image and use these as content of the webApp.
-
-* run container from image:
+* run container from image (mapping ports):
 
 > docker run -p 8501:8501 new-app
 
@@ -78,9 +78,9 @@ The build will copy files in the pages directory into the image and use these as
 
 ---
 
-## Running with mounted volume
+## Running with mounted volumes
 
-This allows changes to files in mounted directory to be propagated to container immediately (*i.e.* without rebuilding) - useful for development!
+This allows changes to files in mounted directory to be propagated to container immediately (*i.e.* without docker rebuilds) - useful for development!
 **NB** this will overwrite any files in linked directory:
 
 > docker run -p 8501:8501 -v $(pwd)/pages:code/pages new-app
