@@ -14,4 +14,6 @@ class Page0(Page):
     def main(self):
         super().main()
 
-        st.write("Content to be added")
+        #pageDict=st.session_state[self.name]
+
+        st.write("Content to be added xxx")

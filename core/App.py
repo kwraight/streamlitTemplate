@@ -1,12 +1,12 @@
 import streamlit as st
-import pages
+import corePages
+import userPages
 ###
 import os
 import sys
 cwd = os.getcwd()
 sys.path.insert(1, cwd+"/core")
 import stInfrastructure as infra
-import page_debug
 
 #####################
 ### useful functions
@@ -27,10 +27,13 @@ class App:
 
     def init_pages(self):
         self.pages = {}
-        for page in pages.__all__:
+        allPages= corePages.__all__ + userPages.__all__
+        # order pages if required
+        #allPages.insert(0, allPages.pop([p().name for p in allPages.index("NAME")))
+        allPages.append(allPages.pop([p().name for p in allPages].index("Broom Cupboard")))
+        for page in allPages:
             p = page() #self.state)
             self.pages[p.name] = p
-        self.pages["Broom Cupboard"] = page_debug
         return
 
 
