@@ -4,7 +4,7 @@ import userPages
 ###
 import os
 import sys
-import stInfrastructure as infra
+import core.stInfrastructure as infra
 
 #####################
 ### useful functions
