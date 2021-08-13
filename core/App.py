@@ -4,8 +4,6 @@ import userPages
 ###
 import os
 import sys
-cwd = os.getcwd()
-sys.path.insert(1, cwd+"/core")
 import stInfrastructure as infra
 
 #####################

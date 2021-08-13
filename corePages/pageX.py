@@ -8,9 +8,7 @@ from annotated_text import annotated_text, annotation
 ###
 import os
 import sys
-cwd = os.getcwd()
-sys.path.insert(1, cwd+"/core")
-import stInfrastructure as infra
+import core.stInfrastructure as infra
 
 ################
 ### Useful functions
