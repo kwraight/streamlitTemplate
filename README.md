@@ -22,7 +22,7 @@ in *core* directory
 *stInfrastructure*: useful wrappers for streamlit functions
 
 ## Core pages:
-in *userPages* directory
+in *corePages* directory
 
 *pageX*: Debug page _a.k.a._ "Broom Cupboard" containing session state settings
 
